@@ -29,7 +29,7 @@ var projection = d3.geoMercator()
     // Load world shape AND list of connection
     d3.queue()
       .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")  // World shape
-      .defer(d3.csv, "https://github.com/richarhila/map/blob/master/cities.csv") // Position of circles
+      .defer(d3.csv, "https://raw.githubusercontent.com/richarhila/map/master/cities.csv") // Position of circles
       .await(ready);
     
     function ready(error, dataGeo, data) {
