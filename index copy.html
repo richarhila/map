@@ -40,7 +40,7 @@ var projection = d3.geoMercator()
           source = [+row.long1, +row.lat1]
           target = [+row.long2, +row.lat2]
           topush = {type: "LineString", coordinates: [source, target]}
-          console.log(`topush is ${topush}`)
+          console.log(`topush is ${topush.coordinates}`)
           link.push(topush)
         })
     
