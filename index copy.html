@@ -38,7 +38,9 @@ var projection = d3.geoMercator()
         var link = []
         data.forEach(function(row){
           source = [+row.long1, +row.lat1]
+          console.log(`source is ${source}`)
           target = [+row.long2, +row.lat2]
+          console.log(`target is ${target}`)
           topush = {type: "LineString", coordinates: [source, target]}
           console.log(`topush is ${topush.coordinates}`)
           link.push(topush)
