@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<style>
+    path {
+      stroke: white;
+      stroke-width: 0.25px;
+      fill: grey;
+    }
+    </style>
 
+<body>
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+<script src="https://d3js.org/topojson.v0.min.js"></script>
 
 <!-- Create an element where the map will take place -->
 <svg id="my_dataviz" width="960" height="500"></svg>
@@ -26,17 +35,13 @@ var projection = d3.geoMercator()
     var path = d3.geoPath()
         .projection(projection)
     
-    // Load world shape AND list of connection
-    d3.queue()
-      .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")  // World shape
-      .defer(d3.csv, "https://raw.githubusercontent.com/richarhila/map/master/cities.csv") // Position of circles
-      .await(ready);
-    
+        var g = svg.append("g");
+
     // load and display the World
-d3.json("world-110m2.json", function(error, topology) {
+d3.json("https://raw.githubusercontent.com/richarhila/map/master/world-110m2.json", function(error, topology) {
 
 // load and display the cities
-d3.csv("cities.csv", function(error, data) {
+d3.csv("https://raw.githubusercontent.com/richarhila/map/master/cities.csv", function(error, data) {
     g.selectAll("circle")
        .data(data)
        .enter()
@@ -64,19 +69,7 @@ g.selectAll("path")
       .attr("d", path)
 });
 
-// zoom and pan
-var zoom = d3.behavior.zoom()
-    .on("zoom",function() {
-        g.attr("transform","translate("+ 
-            d3.event.translate.join(",")+")scale("+d3.event.scale+")");
-        g.selectAll("circle")
-            .attr("d", path.projection(projection));
-        g.selectAll("path")  
-            .attr("d", path.projection(projection)); 
-
-  });
-
-svg.call(zoom)
-
     
-    </script>
+</script>
+</body>
+</html>
